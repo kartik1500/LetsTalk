@@ -33,11 +33,7 @@ gap-2"
 gap-4 opacity-80"
           >
             {imagesDummyData.map((url, index) => (
-              <div
-                key={index}
-                onClick={() => window.open(url)}
-                className="cursor-pointer rounded"
-              >
+              <div key={index} onClick={() => window.open(url)} className="cursor-pointer rounded">
                 <img src={url} alt="" className="h-full rounded-md" />
               </div>
             ))}
