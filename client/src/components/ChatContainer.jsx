@@ -132,16 +132,15 @@ text-white placeholder-gray-400"
             hidden
           />
           <label htmlFor="image">
-            <img
-              onClick={handleSendMessage}
-              src={assets.gallery_icon}
-              alt=""
-              className="w-5 mr-2
-cursor-pointer"
-            />
+            <img src={assets.gallery_icon} alt="Upload" className="w-5 mr-2 cursor-pointer" />
           </label>
         </div>
-        <img src={assets.send_button} alt="" className="w-7 cursor-pointer" />
+        <img
+          src={assets.send_button}
+          alt="Send"
+          className="w-7 cursor-pointer"
+          onClick={handleSendMessage}
+        />
       </div>
     </div>
   ) : (
