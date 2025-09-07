@@ -8,7 +8,7 @@ export const ChatProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [unseenMessages, setUnseenMessages] = useState({});
-
+  const [showRightSidebar, setShowRightSidebar] = useState(false);
   const { socket, axios } = useContext(AuthContext);
 
   // fetch all users + unseen counts
@@ -86,6 +86,8 @@ export const ChatProvider = ({ children }) => {
     getMessages,
     setSelectedUser,
     setUnseenMessages,
+    showRightSidebar,
+    setShowRightSidebar,
   };
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;

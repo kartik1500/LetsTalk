@@ -7,8 +7,15 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 
 const ChatContainer = () => {
-  const { messages, selectedUser, setSelectedUser, sendMessage, getMessages } =
-    useContext(ChatContext);
+  const {
+    messages,
+    selectedUser,
+    setSelectedUser,
+    sendMessage,
+    getMessages,
+    showRightSidebar, // 👈 added
+    setShowRightSidebar, // 👈 added
+  } = useContext(ChatContext);
   const { authUser, onlineUsers } = useContext(AuthContext);
   const scrollEnd = useRef();
   const [input, setInput] = useState("");
@@ -49,9 +56,15 @@ const ChatContainer = () => {
   return selectedUser ? (
     <div className="h-full overflow-scroll relative backdrop-blur-lg">
       {/*----------header-----------*/}
-      <div className="flex items-center gap-3 py-3 mx-4 border-b border-stone-500">
+      <div
+        className="flex items-center gap-3 py-3 mx-4 border-b border-stone-500 cursor-pointer"
+        onClick={() => setShowRightSidebar(true)} // 👈 open sidebar on click
+      >
         <img
-          onClick={() => setSelectedUser(null)}
+          onClick={(e) => {
+            e.stopPropagation(); // prevent sidebar open when going back
+            setSelectedUser(null);
+          }}
           src={assets.arrow_icon}
           alt="back"
           className="w-8 rounded-full cursor-pointer max-md:hidden"
@@ -70,13 +83,17 @@ const ChatContainer = () => {
           )}
         </p>
         <img
-          onClick={() => setSelectedUser(null)}
+          onClick={(e) => {
+            e.stopPropagation(); // prevent sidebar open
+            setSelectedUser(null);
+          }}
           src={assets.arrow_icon}
           alt=""
           className="md:hidden max-w-7"
         />
         <img src={assets.help_icon} alt="" className="max-md:hidden max-w-5" />
       </div>
+
       {/*----------chat area-----------*/}
       <div className="flex flex-col h-[calc(100%-120px)] overflow-y-scroll p-3 pb-6">
         {messages.map((msg, index) => (
@@ -90,7 +107,8 @@ const ChatContainer = () => {
               <img
                 src={msg.image}
                 alt=""
-                className="max-w-[230px] border border-gray-700 rounded-lg overflow-hidden mb-8"
+                className="max-w-[230px] border border-gray-700 rounded-lg overflow-hidden cursor-pointer mb-8"
+                onClick={() => window.open(msg.image)}
               />
             ) : (
               <p
@@ -117,8 +135,8 @@ const ChatContainer = () => {
         ))}
         <div ref={scrollEnd}></div>
       </div>
-      {/*----------bottom area-----------*/}
 
+      {/*----------bottom area-----------*/}
       <div className="absolute bottom-0 left-0 right-0 flex items-center gap-3 p-3">
         <div className="flex-1 flex items-center bg-gray-100/12 px-3 rounded-full">
           <input
@@ -127,8 +145,7 @@ const ChatContainer = () => {
             onKeyDown={(e) => (e.key === "Enter" ? handleSendMessage(e) : null)}
             type="text"
             placeholder="Send a message"
-            className="flex-1 text-sm p-3 border-none rounded-lg outline-none
-text-white placeholder-gray-400"
+            className="flex-1 text-sm p-3 border-none rounded-lg outline-none text-white placeholder-gray-400"
           />
           <input
             onChange={handleSendImage}
