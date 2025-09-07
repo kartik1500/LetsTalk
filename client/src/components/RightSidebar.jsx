@@ -53,6 +53,7 @@ const RightSidebar = () => {
         {/* Media section */}
         <div className="px-5 text-xs">
           <p>Media</p>
+
           <div className="mt-2 h-full overflow-y-scroll grid grid-cols-2 gap-4 opacity-80">
             {msgImages.length > 0 &&
               msgImages.map((url, index) => (
