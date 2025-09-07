@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
 
   // Store the mapping of userId to socket.id
   if (userId) userSocketMap[userId] = socket.id;
-
+  //
   // Emit online users to all connected clients
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
 

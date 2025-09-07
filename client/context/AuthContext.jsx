@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   //Login function to handle user authentication and socket connection
-
+  //
   const login = async (state, credentials) => {
     try {
       const { data } = await axios.post(`/api/auth/${state}`, credentials);

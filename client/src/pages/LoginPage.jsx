@@ -9,7 +9,7 @@ const LoginPage = () => {
   const [bio, setBio] = useState("");
   const [isDataSubmitted, setIsDataSubmitted] = useState(false);
   const [selectedImg, setSelectedImg] = useState(null);
-
+  //
   const { login } = useContext(AuthContext);
 
   const onSubmitHandler = (event) => {
