@@ -45,6 +45,18 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      const render = new FileReader();
+      render.readAsDataURL(credentials.selectedImg);
+      render.onload = async () => {
+        const base64Image = render.result;
+        await updateProfile({
+          fullName: credentials.fullName,
+          bio: credentials.bio,
+          profilePic: base64Image,
+        });
+        navigate("/");
+      };
     }
   };
 
