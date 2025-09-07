@@ -1,4 +1,3 @@
-import React from "react";
 import { useContext, useState } from "react";
 import assets from "../assets/assets";
 import { AuthContext } from "../../context/AuthContext";
@@ -33,7 +32,7 @@ const LoginPage = () => {
         justify-center gap-8 sm:justify-evenly max-sm:flex-col backdrop-blur-2x1"
     >
       {/* left */}
-      <img src={assets.logo_big} alt="" className="w-[250px]" />
+      <img src={assets.logo_big} alt="" className="w-[300px]" />
       {/* {right} */}
 
       <form
