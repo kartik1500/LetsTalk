@@ -10,7 +10,11 @@ const RightSidebar = () => {
 
   useEffect(() => {
     setMsgImages(
-      messages.length > 0 && messages.filter((msg) => msg.image).map((msg) => msg.image)
+      messages.length > 0 &&
+        messages
+          .reverse()
+          .filter((msg) => msg.image)
+          .map((msg) => msg.image)
     );
   }, [messages]);
 
