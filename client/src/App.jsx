@@ -10,7 +10,12 @@ import { ChatProvider } from "../context/ChatProvider";
 const App = () => {
   const { authUser } = useContext(AuthContext);
   return (
-    <div className="bg-[url('./src/assets/bgImage.svg')] bg-contain">
+    <div
+      style={{
+        backgroundImage: "url('/bgImage.svg')",
+      }}
+      className="bg-contain"
+    >
       <ChatProvider>
         <Toaster />
         <Routes>
