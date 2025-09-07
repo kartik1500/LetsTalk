@@ -9,7 +9,9 @@ const RightSidebar = () => {
   const [msgImages, setMsgImages] = useState([]);
 
   useEffect(() => {
-    setMsgImages(messages.filter((msg) => msg.image).map((msg) => msg.image));
+    setMsgImages(
+      messages.length > 0 && messages.filter((msg) => msg.image).map((msg) => msg.image)
+    );
   }, [messages]);
 
   return (

@@ -53,6 +53,7 @@ const LoginPage = () => {
         </h2>
         {currState === "Sign up" && !isDataSubmitted && (
           <input
+            name="fullName"
             onChange={(e) => setFullName(e.target.value)}
             value={fullName}
             type="text"
@@ -66,6 +67,7 @@ const LoginPage = () => {
         {!isDataSubmitted && (
           <>
             <input
+              name="email"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               type="email"
@@ -76,6 +78,7 @@ const LoginPage = () => {
             focus:ring-indigo-500"
             />
             <input
+              name="password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               type="password"
@@ -90,6 +93,7 @@ const LoginPage = () => {
 
         {currState === "Sign up" && isDataSubmitted && (
           <textarea
+            name="bio"
             onChange={(e) => setBio(e.target.value)}
             value={bio}
             rows={4}

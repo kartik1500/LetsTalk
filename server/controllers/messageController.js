@@ -10,10 +10,11 @@ export const getUsersForSidebar = async (req, res) => {
     const filteredUsers = await User.find({ _id: { $ne: userId } }).select("-password");
 
     // Count number of message not seen
-    const unseenMessages = await Message.countDocuments({
+    let unseenMessages = await Message.countDocuments({
       receiverId: userId,
       seen: false,
     });
+
     const promises = filteredUsers.map(async (User) => {
       const messages = await Message.find({
         senderId: User._id,
@@ -21,14 +22,14 @@ export const getUsersForSidebar = async (req, res) => {
         seen: false,
       });
       if (messages.length > 0) {
-        unseenMessages[User._id] = messages.length;
+        unseenMessages = messages.length;
       }
     });
 
     await Promise.all(promises);
     res.json({ success: true, users: filteredUsers, unseenMessages });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -48,7 +49,7 @@ export const getMessages = async (req, res) => {
     await Message.updateMany({ senderId: selectedUserId, receiverId: myId }, { seen: true });
     res.json({ success: true, messages });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -60,7 +61,7 @@ export const markMessageAsSeen = async (req, res) => {
     await Message.findByIdAndUpdate(id, { seen: true });
     res.json({ success: true });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -92,7 +93,7 @@ export const sendMessage = async (req, res) => {
 
     res.json({ success: true, newMessage });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     res.json({ success: false, message: error.message });
   }
 };

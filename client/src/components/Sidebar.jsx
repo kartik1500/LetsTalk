@@ -16,7 +16,8 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const filteredUsers = input
-    ? users.filter((user) => user.fullName.toLowerCase().includes(input.toLowerCase()))
+    ? users.length > 0 &&
+      users.filter((user) => user.fullName.toLowerCase().includes(input.toLowerCase()))
     : users;
 
   useEffect(() => {
@@ -63,6 +64,8 @@ const Sidebar = () => {
               setSelectedUser(
                 selectedUser?._id === user._id ? null : user // toggle logic
               );
+
+              setUnseenMessages(0);
             }}
             key={index}
             className={`relative hover:backdrop-blur-3xl flex items-center gap-2 p-2 pl-4 rounded cursor-pointer max-sm:text-sm ${

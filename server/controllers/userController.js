@@ -29,7 +29,7 @@ export const signup = async (req, res) => {
 
     res.json({ success: true, userData: newUser, token, message: "Account created successfully" });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -50,7 +50,7 @@ export const login = async (req, res) => {
 
     res.json({ success: true, userData, token, message: "Login successfully" });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -79,7 +79,7 @@ export const updateProfile = async (req, res) => {
     }
     res.json({ success: true, user: updatedUser, message: "Profile updated successfully" });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
