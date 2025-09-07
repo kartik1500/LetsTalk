@@ -38,7 +38,7 @@ const LoginPage = () => {
       <form
         onSubmit={onSubmitHandler}
         className="border-2 bg-white/8 text-white border-gray-500 p-6 flex
-        flex-col gap-6 rounded-1g shadow-1g"
+        flex-col gap-6 rounded-md shadow-md"
       >
         <h2 className="font-medium text-2xl flex justify-between items-center">
           {currState}
