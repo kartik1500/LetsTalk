@@ -26,6 +26,12 @@ export const signup = async (req, res) => {
     });
 
     const token = generateToken(newUser._id);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 15),
+    });
 
     res.json({ success: true, userData: newUser, token, message: "Account created successfully" });
   } catch (error) {
@@ -47,6 +53,12 @@ export const login = async (req, res) => {
       return res.json({ success: false, message: "Invalid credentials" });
     }
     const token = generateToken(userData._id);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 15),
+    });
 
     res.json({ success: true, userData, token, message: "Login successfully" });
   } catch (error) {

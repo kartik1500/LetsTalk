@@ -6,6 +6,7 @@ import { connectDB } from "./lib/db.js";
 import userRouter from "./routes/userRoutes.js";
 import messageRouter from "./routes/messageRoutes.js";
 import { Server } from "socket.io";
+import cookieParser from "cookie-parser";
 //Create express app and http server
 
 const app = express();
@@ -42,7 +43,12 @@ io.on("connection", (socket) => {
 });
 
 //Middleware setup
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+app.use(cookieParser());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
